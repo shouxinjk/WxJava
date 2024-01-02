@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.github.binarywang</groupId>
     <artifactId>wx-java</artifactId>
-    <version>4.5.4.B-ilife</version>
+    <version>4.6.0-ilife</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
@@ -42,7 +42,7 @@
 
     <dependency>
       <groupId>org.bouncycastle</groupId>
-      <artifactId>bcpkix-jdk15on</artifactId>
+      <artifactId>bcpkix-jdk18on</artifactId>
     </dependency>
 
     <dependency>
@@ -77,6 +77,8 @@
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>4.0.1</version>
+      <optional>true</optional>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 

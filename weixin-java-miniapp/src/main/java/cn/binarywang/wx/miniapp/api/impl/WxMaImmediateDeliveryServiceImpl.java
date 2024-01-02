@@ -2,32 +2,12 @@ package cn.binarywang.wx.miniapp.api.impl;
 
 import cn.binarywang.wx.miniapp.api.WxMaImmediateDeliveryService;
 import cn.binarywang.wx.miniapp.api.WxMaService;
-import cn.binarywang.wx.miniapp.bean.delivery.AbnormalConfirmRequest;
-import cn.binarywang.wx.miniapp.bean.delivery.AbnormalConfirmResponse;
-import cn.binarywang.wx.miniapp.bean.delivery.AddOrderRequest;
-import cn.binarywang.wx.miniapp.bean.delivery.AddOrderResponse;
-import cn.binarywang.wx.miniapp.bean.delivery.BindAccountResponse;
-import cn.binarywang.wx.miniapp.bean.delivery.CancelOrderRequest;
-import cn.binarywang.wx.miniapp.bean.delivery.CancelOrderResponse;
-import cn.binarywang.wx.miniapp.bean.delivery.FollowWaybillRequest;
-import cn.binarywang.wx.miniapp.bean.delivery.FollowWaybillResponse;
-import cn.binarywang.wx.miniapp.bean.delivery.GetOrderRequest;
-import cn.binarywang.wx.miniapp.bean.delivery.GetOrderResponse;
-import cn.binarywang.wx.miniapp.bean.delivery.MockUpdateOrderRequest;
-import cn.binarywang.wx.miniapp.bean.delivery.MockUpdateOrderResponse;
-import cn.binarywang.wx.miniapp.bean.delivery.QueryFollowTraceRequest;
-import cn.binarywang.wx.miniapp.bean.delivery.QueryFollowTraceResponse;
-import cn.binarywang.wx.miniapp.bean.delivery.QueryWaybillTraceRequest;
-import cn.binarywang.wx.miniapp.bean.delivery.QueryWaybillTraceResponse;
-import cn.binarywang.wx.miniapp.bean.delivery.TraceWaybillRequest;
-import cn.binarywang.wx.miniapp.bean.delivery.TraceWaybillResponse;
+import cn.binarywang.wx.miniapp.bean.delivery.*;
 import cn.binarywang.wx.miniapp.bean.delivery.base.WxMaDeliveryBaseResponse;
 import cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants;
 import cn.binarywang.wx.miniapp.constant.WxMaApiUrlConstants.InstantDelivery;
-import cn.binarywang.wx.miniapp.constant.WxMaConstants;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import javassist.bytecode.ConstPool;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.enums.WxType;
 import me.chanjar.weixin.common.error.WxError;
@@ -79,7 +59,7 @@ public class WxMaImmediateDeliveryServiceImpl implements WxMaImmediateDeliverySe
    */
   @Override
   public BindAccountResponse getBindAccount() throws WxErrorException {
-    return this.parse(this.wxMaService.post(WxMaApiUrlConstants.InstantDelivery.GET_BIND_ACCOUNT, "{}"),
+    return this.parse(this.wxMaService.post(InstantDelivery.GET_BIND_ACCOUNT, "{}"),
       BindAccountResponse.class);
   }
 
@@ -96,7 +76,7 @@ public class WxMaImmediateDeliveryServiceImpl implements WxMaImmediateDeliverySe
   @Override
   public AddOrderResponse addOrder(final AddOrderRequest request) throws WxErrorException {
     request.getDeliverySign();
-    return this.parse(this.wxMaService.post(WxMaApiUrlConstants.InstantDelivery.PlaceAnOrder.ADD_ORDER, request),
+    return this.parse(this.wxMaService.post(InstantDelivery.PlaceAnOrder.ADD_ORDER, request),
       AddOrderResponse.class);
   }
 
@@ -114,7 +94,7 @@ public class WxMaImmediateDeliveryServiceImpl implements WxMaImmediateDeliverySe
   @Override
   public GetOrderResponse getOrder(final GetOrderRequest request) throws WxErrorException {
     request.getDeliverySign();
-    return this.parse(this.wxMaService.post(WxMaApiUrlConstants.InstantDelivery.GET_ORDER, request),
+    return this.parse(this.wxMaService.post(InstantDelivery.GET_ORDER, request),
       GetOrderResponse.class);
   }
 
@@ -131,7 +111,7 @@ public class WxMaImmediateDeliveryServiceImpl implements WxMaImmediateDeliverySe
   @Override
   public CancelOrderResponse cancelOrder(final CancelOrderRequest request) throws WxErrorException {
     request.getDeliverySign();
-    return this.parse(this.wxMaService.post(WxMaApiUrlConstants.InstantDelivery.Cancel.CANCEL_ORDER, request),
+    return this.parse(this.wxMaService.post(InstantDelivery.Cancel.CANCEL_ORDER, request),
       CancelOrderResponse.class);
   }
 
@@ -148,7 +128,7 @@ public class WxMaImmediateDeliveryServiceImpl implements WxMaImmediateDeliverySe
   @Override
   public AbnormalConfirmResponse abnormalConfirm(final AbnormalConfirmRequest request) throws WxErrorException {
     request.getDeliverySign();
-    return this.parse(this.wxMaService.post(WxMaApiUrlConstants.InstantDelivery.Cancel.ABNORMAL_CONFIRM, request),
+    return this.parse(this.wxMaService.post(InstantDelivery.Cancel.ABNORMAL_CONFIRM, request),
       AbnormalConfirmResponse.class);
   }
 
@@ -164,7 +144,7 @@ public class WxMaImmediateDeliveryServiceImpl implements WxMaImmediateDeliverySe
    */
   @Override
   public MockUpdateOrderResponse mockUpdateOrder(final MockUpdateOrderRequest request) throws WxErrorException {
-    return this.parse(this.wxMaService.post(WxMaApiUrlConstants.InstantDelivery.MOCK_UPDATE_ORDER, request),
+    return this.parse(this.wxMaService.post(InstantDelivery.MOCK_UPDATE_ORDER, request),
       MockUpdateOrderResponse.class);
   }
 
@@ -204,7 +184,7 @@ public class WxMaImmediateDeliveryServiceImpl implements WxMaImmediateDeliverySe
 
   @Override
   public QueryFollowTraceResponse queryFollowTrace(
-    QueryFollowTraceRequest request) throws WxErrorException  {
+    QueryFollowTraceRequest request) throws WxErrorException {
     String responseContent = this.wxMaService.post(InstantDelivery.QUERY_FOLLOW_TRACE_URL, request);
     QueryFollowTraceResponse response = QueryFollowTraceResponse.fromJson(responseContent);
     if (response.getErrcode() == -1) {

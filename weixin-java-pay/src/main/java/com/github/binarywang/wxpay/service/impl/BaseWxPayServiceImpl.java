@@ -75,9 +75,6 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
   private final ProfitSharingService profitSharingService = new ProfitSharingServiceImpl(this);
 
   @Getter
-  private final ProfitSharingV3Service profitSharingV3Service = new ProfitSharingV3ServiceImpl(this);
-
-  @Getter
   private final RedpackService redpackService = new RedpackServiceImpl(this);
 
   @Getter
@@ -121,6 +118,9 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
 
   @Getter
   private final PartnerPayScoreService partnerPayScoreService = new PartnerPayScoreServiceImpl(this);
+
+  @Getter
+  private final PartnerPayScoreSignPlanService partnerPayScoreSignPlanService=new PartnerPayScoreSignPlanServiceImpl(this);
 
   @Getter
   private final MerchantTransferService merchantTransferService = new MerchantTransferServiceImpl(this);
@@ -294,6 +294,13 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
   @Override
   public WxPayRefundQueryV3Result refundQueryV3(WxPayRefundQueryV3Request request) throws WxPayException {
     String url = String.format("%s/v3/refund/domestic/refunds/%s", this.getPayBaseUrl(), request.getOutRefundNo());
+    String response = this.getV3(url);
+    return GSON.fromJson(response, WxPayRefundQueryV3Result.class);
+  }
+
+  @Override
+  public WxPayRefundQueryV3Result refundPartnerQueryV3(WxPayRefundQueryV3Request request) throws WxPayException {
+    String url = String.format("%s/v3/refund/domestic/refunds/%s?sub_mchid=%s", this.getPayBaseUrl(), request.getOutRefundNo(),request.getSubMchid());
     String response = this.getV3(url);
     return GSON.fromJson(response, WxPayRefundQueryV3Result.class);
   }
@@ -833,7 +840,7 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
   }
 
   @Override
-  public byte[] createScanPayQrcodeMode1(String productId, File logoFile, Integer sideLength) {
+  public byte[] createScanPayQrcodeMode1(String productId, File logoFile, Integer sideLength) throws Exception {
     String content = this.createScanPayQrcodeMode1(productId);
     return this.createQrcode(content, logoFile, sideLength);
   }
@@ -863,11 +870,11 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
   }
 
   @Override
-  public byte[] createScanPayQrcodeMode2(String codeUrl, File logoFile, Integer sideLength) {
+  public byte[] createScanPayQrcodeMode2(String codeUrl, File logoFile, Integer sideLength) throws Exception {
     return this.createQrcode(codeUrl, logoFile, sideLength);
   }
 
-  private byte[] createQrcode(String content, File logoFile, Integer sideLength) {
+  private byte[] createQrcode(String content, File logoFile, Integer sideLength) throws Exception {
     if (sideLength == null || sideLength < 1) {
       return QrcodeUtils.createQrcode(content, logoFile);
     }
@@ -964,7 +971,6 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
 
   @Override
   public WxPayFundFlowResult downloadFundFlow(String billDate, String accountType, String tarType) throws WxPayException {
-
     WxPayDownloadFundFlowRequest request = new WxPayDownloadFundFlowRequest();
     request.setBillDate(billDate);
     request.setAccountType(accountType);
@@ -1095,9 +1101,9 @@ public abstract class BaseWxPayServiceImpl implements WxPayService {
   public WxPayApplyBillV3Result applyFundFlowBill(WxPayApplyFundFlowBillV3Request request) throws WxPayException {
     String url;
     if (StringUtils.isBlank(request.getTarType())) {
-      url = String.format("%s/v3/bill/fundflowbill?bill_date=%s&bill_type=%s", this.getPayBaseUrl(), request.getBillDate(), request.getAccountType());
+      url = String.format("%s/v3/bill/fundflowbill?bill_date=%s&account_type=%s", this.getPayBaseUrl(), request.getBillDate(), request.getAccountType());
     } else {
-      url = String.format("%s/v3/bill/fundflowbill?bill_date=%s&bill_type=%s&tar_type=%s", this.getPayBaseUrl(), request.getBillDate(), request.getAccountType(), request.getTarType());
+      url = String.format("%s/v3/bill/fundflowbill?bill_date=%s&account_type=%s&tar_type=%s", this.getPayBaseUrl(), request.getBillDate(), request.getAccountType(), request.getTarType());
     }
     String response = this.getV3(url);
     return GSON.fromJson(response, WxPayApplyBillV3Result.class);

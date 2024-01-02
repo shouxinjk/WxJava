@@ -11,6 +11,7 @@ import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+
 import java.io.File;
 import java.io.InputStream;
 import java.util.Date;
@@ -240,19 +241,12 @@ public interface WxPayService {
   /**
    * 获取分账服务类.
    * <p>
-   * V3接口 {@link WxPayService#getProfitSharingV3Service()}
+   * V3接口 {@link WxPayService#getProfitSharingService()}
    * </p>
    *
    * @return the ent pay service
    */
   ProfitSharingService getProfitSharingService();
-
-  /**
-   * 获取V3分账服务类.
-   *
-   * @return the ent pay service
-   */
-  ProfitSharingV3Service getProfitSharingV3Service();
 
   /**
    * 获取支付分服务类.
@@ -868,7 +862,7 @@ public interface WxPayService {
 
   /**
    * <pre>
-   * 微信支付-查询退款
+   * 微信支付-查询退款-直连商户
    * 应用场景：
    *  提交退款申请后，通过调用该接口查询退款状态。退款有一定延时，建议在提交退款申请后1分钟发起查询退款状态，一般来说零钱支付的退款5分钟内到账，银行卡支付的退款1-3个工作日到账。
    *  详见 <a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_10.shtml">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_10.shtml</a>
@@ -880,6 +874,21 @@ public interface WxPayService {
    * @throws WxPayException the wx pay exception
    */
   WxPayRefundQueryV3Result refundQueryV3(WxPayRefundQueryV3Request request) throws WxPayException;
+
+  /**
+   * <pre>
+   * 微信支付-查询退款-服务商
+   * 应用场景：
+   *  提交退款申请后，通过调用该接口查询退款状态。退款有一定延时，建议在提交退款申请后1分钟发起查询退款状态，一般来说零钱支付的退款5分钟内到账，银行卡支付的退款1-3个工作日到账。
+   *  详见 <a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_1_10.shtml">https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_1_10.shtml</a>
+   * 接口链接：https://api.mch.weixin.qq.com/v3/refund/domestic/refunds/{out_refund_no}?sub_mchid={sub_mchid}
+   * </pre>
+   *
+   * @param request 微信退款单号
+   * @return 退款信息 wx pay refund query result
+   * @throws WxPayException the wx pay exception
+   */
+  WxPayRefundQueryV3Result refundPartnerQueryV3(WxPayRefundQueryV3Request request) throws WxPayException;
 
   /**
    * 解析支付结果通知.
@@ -1017,7 +1026,7 @@ public interface WxPayService {
    * @param sideLength 要生成的二维码的边长，如果为空，则取默认值400
    * @return 生成的二维码的字节数组 byte [ ]
    */
-  byte[] createScanPayQrcodeMode1(String productId, File logoFile, Integer sideLength);
+  byte[] createScanPayQrcodeMode1(String productId, File logoFile, Integer sideLength) throws Exception;
 
   /**
    * <pre>
@@ -1046,7 +1055,7 @@ public interface WxPayService {
    * @param sideLength 要生成的二维码的边长，如果为空，则取默认值400
    * @return 生成的二维码的字节数组 byte [ ]
    */
-  byte[] createScanPayQrcodeMode2(String codeUrl, File logoFile, Integer sideLength);
+  byte[] createScanPayQrcodeMode2(String codeUrl, File logoFile, Integer sideLength) throws Exception;
 
   /**
    * <pre>
@@ -1521,4 +1530,9 @@ public interface WxPayService {
    */
   PartnerPayScoreService getPartnerPayScoreService();
 
+  /**
+   * 获取服务商直股份签约计划服务类
+   * @return  the partner pay score sign plan service
+   */
+  PartnerPayScoreSignPlanService getPartnerPayScoreSignPlanService();
 }

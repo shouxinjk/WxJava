@@ -542,4 +542,17 @@ public interface WxMaService extends WxService {
    * @return getWxMaOpenApiService
    */
   WxMaOpenApiService getWxMaOpenApiService();
+  /**
+   * 小程序短剧管理
+   *
+   * @return getWxMaVodService
+   */
+  WxMaVodService getWxMaVodService();
+  /**
+   * 小程序虚拟支付
+   *
+   * @return getWxMaXPayService
+   */
+  WxMaXPayService getWxMaXPayService();
+  WxMaExpressDeliveryReturnService getWxMaExpressDeliveryReturnService();
 }

@@ -148,6 +148,14 @@ public interface WxCpApiPathConsts {
      * The constant URL_OAUTH2_AUTHORIZE.
      */
     String URL_OAUTH2_AUTHORIZE = "https://open.weixin.qq.com/connect/oauth2/authorize";
+    /**
+     * The constant GET_USER_INFO without agentId.
+     */
+    String GET_USER_AUTH_INFO = "/cgi-bin/auth/getuserinfo?code=%s";
+    /**
+     * The constant GET_TFA_INFO.
+     */
+    String GET_TFA_INFO = "/cgi-bin/auth/get_tfa_info";
   }
 
   /**
@@ -1334,6 +1342,10 @@ public interface WxCpApiPathConsts {
      */
     String CUSTOMER_ACQUISITION_QUOTA = "/cgi-bin/externalcontact/customer_acquisition_quota";
 
+    /**
+     * 查询链接使用详情
+     */
+    String CUSTOMER_ACQUISITION_STATISTIC = "/cgi-bin/externalcontact/customer_acquisition/statistic";
   }
 
   /**

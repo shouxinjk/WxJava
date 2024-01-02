@@ -18,6 +18,7 @@ import me.chanjar.weixin.open.bean.ma.WxMaPrefetchDomain;
 import me.chanjar.weixin.open.bean.ma.WxMaQrcodeParam;
 import me.chanjar.weixin.open.bean.ma.WxMaScheme;
 import me.chanjar.weixin.open.bean.message.WxOpenMaSubmitAuditMessage;
+import me.chanjar.weixin.open.bean.message.WxOpenMaVerifyBetaWeappMessage;
 import me.chanjar.weixin.open.bean.result.*;
 import me.chanjar.weixin.open.executor.MaQrCodeRequestExecutor;
 
@@ -36,6 +37,8 @@ import java.util.Map;
  * created on  2018-09-12
  */
 public class WxOpenMaServiceImpl extends WxMaServiceImpl implements WxOpenMaService {
+  private static final String ACTION = "action";
+  private static final String ACTION_GET = "get";
   private final WxOpenComponentService wxOpenComponentService;
   private final WxMaConfig wxMaConfig;
   private final String appId;
@@ -73,41 +76,44 @@ public class WxOpenMaServiceImpl extends WxMaServiceImpl implements WxOpenMaServ
 
   @Override
   public WxOpenMaDomainResult getDomain() throws WxErrorException {
-    return modifyDomain("get", null, null, null, null);
+    return modifyDomain(ACTION_GET, null, null, null,
+      null, null, null);
   }
 
   @Override
-  public WxOpenMaDomainResult modifyDomain(String action, List<String> requestDomains, List<String> wsRequestDomains, List<String> uploadDomains, List<String> downloadDomains) throws WxErrorException {
-//    if (!"get".equals(action) && (requestdomainList == null || wsrequestdomainList == null || uploaddomainList == null || downloaddomainList == null)) {
-//      throw new WxErrorException(WxError.builder().errorCode(44004).errorMsg("域名参数不能为空").build());
-//    }
+  public WxOpenMaDomainResult modifyDomain(String action, List<String> requestDomains, List<String> wsRequestDomains,
+                                           List<String> uploadDomains, List<String> downloadDomains,
+                                           List<String> udpDomains, List<String> tcpDomains) throws WxErrorException {
     JsonObject requestJson = new JsonObject();
-    requestJson.addProperty("action", action);
-    if (!"get".equals(action)) {
+    requestJson.addProperty(ACTION, action);
+    if (!ACTION_GET.equals(action)) {
       requestJson.add("requestdomain", toJsonArray(requestDomains));
       requestJson.add("wsrequestdomain", toJsonArray(wsRequestDomains));
       requestJson.add("uploaddomain", toJsonArray(uploadDomains));
       requestJson.add("downloaddomain", toJsonArray(downloadDomains));
+      requestJson.add("udpdomain", toJsonArray(udpDomains));
+      requestJson.add("tcpdomain", toJsonArray(tcpDomains));
     }
+
     String response = post(API_MODIFY_DOMAIN, GSON.toJson(requestJson));
     return WxMaGsonBuilder.create().fromJson(response, WxOpenMaDomainResult.class);
   }
 
   @Override
   public String getWebViewDomain() throws WxErrorException {
-    return setWebViewDomain("get", null);
+    return setWebViewDomain(ACTION_GET, null);
   }
 
   @Override
   public WxOpenMaWebDomainResult getWebViewDomainInfo() throws WxErrorException {
-    return setWebViewDomainInfo("get", null);
+    return setWebViewDomainInfo(ACTION_GET, null);
   }
 
   @Override
   public String setWebViewDomain(String action, List<String> domainList) throws WxErrorException {
     JsonObject requestJson = new JsonObject();
-    requestJson.addProperty("action", action);
-    if (!"get".equals(action)) {
+    requestJson.addProperty(ACTION, action);
+    if (!ACTION_GET.equals(action)) {
       requestJson.add("webviewdomain", toJsonArray(domainList));
     }
     return post(API_SET_WEBVIEW_DOMAIN, GSON.toJson(requestJson));
@@ -159,7 +165,7 @@ public class WxOpenMaServiceImpl extends WxMaServiceImpl implements WxOpenMaServ
   @Override
   public WxOpenMaTesterListResult getTesterList() throws WxErrorException {
     JsonObject paramJson = new JsonObject();
-    paramJson.addProperty("action", "get_experiencer");
+    paramJson.addProperty(ACTION, "get_experiencer");
     String response = post(API_GET_TESTERLIST, GSON.toJson(paramJson));
     return WxMaGsonBuilder.create().fromJson(response, WxOpenMaTesterListResult.class);
   }
@@ -214,6 +220,12 @@ public class WxOpenMaServiceImpl extends WxMaServiceImpl implements WxOpenMaServ
   }
 
   @Override
+  public WxOpenResult verifyBetaWeapp(WxOpenMaVerifyBetaWeappMessage verifyBetaWeappMessage) throws WxErrorException {
+    String response = post(API_VERIFY_BETA_WEAPP, GSON.toJson(verifyBetaWeappMessage));
+    return WxMaGsonBuilder.create().fromJson(response, WxOpenResult.class);
+  }
+
+  @Override
   public WxOpenMaCategoryListResult getCategoryList() throws WxErrorException {
     String response = get(API_GET_CATEGORY, null);
     return WxMaGsonBuilder.create().fromJson(response, WxOpenMaCategoryListResult.class);
@@ -255,7 +267,7 @@ public class WxOpenMaServiceImpl extends WxMaServiceImpl implements WxOpenMaServ
   @Override
   public WxOpenResult changeVisitStatus(String action) throws WxErrorException {
     JsonObject params = new JsonObject();
-    params.addProperty("action", action);
+    params.addProperty(ACTION, action);
     String response = post(API_CHANGE_VISITSTATUS, GSON.toJson(params));
     return WxMaGsonBuilder.create().fromJson(response, WxOpenResult.class);
   }
@@ -450,7 +462,7 @@ public class WxOpenMaServiceImpl extends WxMaServiceImpl implements WxOpenMaServ
   @Override
   public WxOpenMaApplyLiveInfoResult applyLiveInfo() throws WxErrorException {
     JsonObject params = new JsonObject();
-    params.addProperty("action", "apply");
+    params.addProperty(ACTION, "apply");
     String response = post(API_WX_APPLY_LIVE_INFO, GSON.toJson(params));
     return WxMaGsonBuilder.create().fromJson(response, WxOpenMaApplyLiveInfoResult.class);
   }

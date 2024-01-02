@@ -185,7 +185,8 @@ public interface WxCpUserService {
    * 文档地址：https://developer.work.weixin.qq.com/document/path/95895
    * </pre>
    *
-   * @param email 手机号码。长度为5~32个字节
+   * @param email 邮箱
+   * @param emailType 邮箱类型：1-企业邮箱；2-个人邮箱
    * @return userid email对应的成员userid
    * @throws WxErrorException .
    */

@@ -181,4 +181,126 @@ public class WxMaConstants {
      */
     public static final String ZH_TW = "zh_TW";
   }
+
+  @UtilityClass
+  public static final class AuditStatus {
+    public static final int INVALID = 0;
+    public static final int ONGOING = 1;
+    public static final int REJECTED = 2;
+    public static final int APPROVED = 3;
+    public static final int RECOMMIT = 4;
+  }
+
+
+  @UtilityClass
+  public static final class ExpeditedType {
+
+    /**
+     * 非加急
+     */
+    public static final int NORMAL = 0;
+
+    /**
+     * 加急
+     */
+    public static final int HIGH_PRIORITY = 1;
+  }
+
+  @UtilityClass
+  public static final class UploadTaskType {
+    public static final int PULL_UPLOAD = 1;
+  }
+
+  @UtilityClass
+  public static final class UploadTaskStatus {
+    public static final int WAITING = 1;
+    public static final int WORKING = 2;
+    public static final int DONE = 3;
+    public static final int FAILED = 4;
+  }
+
+  @UtilityClass
+  public static final class UploadResourceType {
+    public static final int MEDIA = 1;
+    public static final int COVER = 2;
+  }
+  @UtilityClass
+  public static final class XPayEnv {
+    public static final int PRODUCT = 0;
+    public static final int SANDBOX = 1;
+  }
+  @UtilityClass
+  public static final class XPayFirstCharge {
+    public static final int NO = 0;
+    public static final int YES = 1;
+  }
+  @UtilityClass
+  public static final class XPayDeviceType {
+    public static final int ANDROID = 1;
+    public static final int IOS = 2;
+  }
+  @UtilityClass
+  public static final class XPayBizType {
+    public static final int SHORT_DRAMA = 1;
+  }
+  @UtilityClass
+  public static final class XPayOrderType {
+    public static final int PAY_ORDER = 0;//0-支付单
+    public static final int REFUND_ORDER = 1;//1-退款单
+  }
+  @UtilityClass
+  public static final class XPayOrderStatus {
+    public static final int INIT = 0;//0-订单初始化（未创建成功，不可用于支付）
+    public static final int CREATED = 1;// 1-订单创建成功
+    public static final int PAID = 2;//2-订单已经支付，待发货
+    public static final int PROVIDING = 3;// 3-订单发货中
+    public static final int PROVIDED = 4;// 4-订单已发货
+    public static final int REFUNDED = 5;// 5-订单已经退款
+    public static final int CLOSED = 6;// 6-订单已经关闭（不可再使用）
+    public static final int REFUND_FAILED = 7;// 7-订单退款失败
+  }
+  @UtilityClass
+  public static final class XPayNotifyEvent {
+    public static String COIN_PAY = "xpay_coin_pay_notify";
+    public static String GOODS_DELIVER = "xpay_goods_deliver_notify";
+
+  }
+  @UtilityClass
+  public static final class XPayPaymentMode {
+    public static String COIN = "short_series_coin";
+    public static String GOODS = "short_series_goods";
+
+  }
+
+  @UtilityClass
+  public static final class XPayPlatform {
+    public static String ANDROID = "android";
+  }
+
+  @UtilityClass
+  public static final class XPayCurrencyType {
+    public static String CNY = "CNY";
+
+  }
+
+  @UtilityClass
+  public static final class XPayWxApiSigUri {
+    public static String WXAPI = "requestVirtualPayment";
+
+  }
+
+  @UtilityClass
+  public static final class XPayRefundReqFrom {
+    public static final String FROM_CS = "1";//人工客服退款
+    public static final String FROM_USER = "2";//用户自己发起
+    public static final String FROM_MISC = "3";//1-其它
+  }
+
+  @UtilityClass
+  public static final class XPayPublishStatus {
+    public static final int PUBLISH_UPLOADING = 0;//0-上传中
+    public static final int PUBLISH_EXISTED = 1;//1-id已经存在
+    public static final int PUBLISH_SUCCESSFUL = 2;//  2-发布成功
+    public static final int PUBLISH_FAILED = 3;//3-发布失败
+  }
 }

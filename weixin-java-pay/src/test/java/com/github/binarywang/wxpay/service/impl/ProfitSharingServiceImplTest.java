@@ -1,6 +1,11 @@
 package com.github.binarywang.wxpay.service.impl;
 
+import com.github.binarywang.wxpay.bean.notify.SignatureHeader;
 import com.github.binarywang.wxpay.bean.profitsharing.*;
+import com.github.binarywang.wxpay.bean.profitsharing.request.*;
+import com.github.binarywang.wxpay.bean.profitsharing.result.ProfitSharingMerchantRatioQueryResult;
+import com.github.binarywang.wxpay.bean.profitsharing.result.ProfitSharingOrderAmountQueryResult;
+import com.github.binarywang.wxpay.bean.profitsharing.result.ProfitSharingQueryResult;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
@@ -52,7 +57,7 @@ public class ProfitSharingServiceImplTest {
 
   @Test
   public void testProfitSharingFinish() throws WxPayException {
-    ProfitSharingFinishRequest request = ProfitSharingFinishRequest
+    ProfitSharingUnfreezeRequest request = ProfitSharingUnfreezeRequest
       .newBuilder()
       .outOrderNo("20191023103251431856285")
       .transactionId("4200000441201910238267278073")
@@ -138,6 +143,17 @@ public class ProfitSharingServiceImplTest {
       .outReturnNo("R2019102315")
       .build();
     log.info(this.payService.getProfitSharingService().profitSharingReturnQuery(request).toString());
+  }
+
+  @Test
+  public void testProfitSharingNotifyData() throws WxPayException {
+    SignatureHeader header = new SignatureHeader();
+    header.setSerial("Wechatpay-Serial");
+    header.setTimeStamp("Wechatpay-Timestamp");
+    header.setNonce("Wechatpay-Nonce");
+    header.setSignature("Wechatpay-Signature");
+    String data = "body";
+    log.info(this.payService.getProfitSharingService().parseProfitSharingNotifyResult(data,header).toString());
   }
 
 }
