@@ -1007,6 +1007,10 @@ public interface WxCpApiPathConsts {
     String GET_EXTERNAL_CONTACT = "/cgi-bin/crm/get_external_contact?external_userid=";
 
     /**
+     * The constant LIST_CONTACT_WAY.
+     */
+    String LIST_CONTACT_WAY = "/cgi-bin/externalcontact/list_contact_way";
+    /**
      * The constant ADD_CONTACT_WAY.
      */
     String ADD_CONTACT_WAY = "/cgi-bin/externalcontact/add_contact_way";
@@ -1509,8 +1513,14 @@ public interface WxCpApiPathConsts {
      * 将微信客户的unionid转为第三方主体的external_userid
      * 该接口有调用频率限制，当subject_type为0时，按企业作如下的限制：10万次/小时、48万次/天、750万次/月
      */
+    String EXTERNAL_USERID_TO_PENDING_ID = "/cgi-bin/idconvert/batch/external_userid_to_pending_id";
+    
+    /**
+     * 将微信客户的external_userid转为pending_id
+     * 本接口获取到的pending_id可以维持unionid和external_userid的关联关系。pending_id有效期为90天，超过有效期之后，将无法通过该接口将external_userid换取对应的pending_id。
+     */
     String UNION_ID_TO_EXTERNAL_USER_ID = "/cgi-bin/idconvert/unionid_to_external_userid";
-
+    
     /**
      * 将企业主体下的微信客服ID转换成服务商主体下的微信客服ID
      */

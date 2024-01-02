@@ -6,6 +6,7 @@ import com.google.gson.JsonPrimitive;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.bean.WxCpTpConvertTmpExternalUserIdResult;
+import me.chanjar.weixin.cp.bean.WxCpTpExternalUseridToPendingidResult;
 import me.chanjar.weixin.cp.bean.WxCpTpOpenKfIdConvertResult;
 import me.chanjar.weixin.cp.bean.WxCpTpTagIdListConvertResult;
 import me.chanjar.weixin.cp.bean.WxCpTpUnionidToExternalUseridResult;
@@ -38,6 +39,28 @@ public class WxCpTpIdConvertServiceImpl implements WxCpTpIdConvertService {
     url += "?access_token=" + accessToken;
     String responseContent = this.mainService.post(url, json.toString());
     return WxCpTpUnionidToExternalUseridResult.fromJson(responseContent);
+  }
+  
+  @Override
+  public WxCpTpExternalUseridToPendingidResult externalUseridToPendingid(String cropId, String chatId,
+  		String... externalUeridList) throws WxErrorException {
+	    JsonObject json = new JsonObject();
+	    if (chatId != null && chatId.trim().length()>0) {
+	    	json.addProperty("chat_id", chatId);
+	    }
+	    
+	    JsonArray jsonArray = new JsonArray();
+	    for (String externalUerid : externalUeridList) {
+	      jsonArray.add(new JsonPrimitive(externalUerid));
+	    }
+	    json.add("external_userid", jsonArray);
+	    
+	    WxCpTpConfigStorage wxCpTpConfigStorage = mainService.getWxCpTpConfigStorage();
+	    String accessToken = wxCpTpConfigStorage.getAccessToken(cropId);
+	    String url = wxCpTpConfigStorage.getApiUrl(WxCpApiPathConsts.IdConvert.EXTERNAL_USERID_TO_PENDING_ID);
+	    url += "?access_token=" + accessToken;
+	    String responseContent = this.mainService.post(url, json.toString());
+	    return WxCpTpExternalUseridToPendingidResult.fromJson(responseContent);
   }
 
   @Override

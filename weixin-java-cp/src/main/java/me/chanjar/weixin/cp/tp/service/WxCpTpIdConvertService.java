@@ -2,6 +2,7 @@ package me.chanjar.weixin.cp.tp.service;
 
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.bean.WxCpTpConvertTmpExternalUserIdResult;
+import me.chanjar.weixin.cp.bean.WxCpTpExternalUseridToPendingidResult;
 import me.chanjar.weixin.cp.bean.WxCpTpOpenKfIdConvertResult;
 import me.chanjar.weixin.cp.bean.WxCpTpTagIdListConvertResult;
 import me.chanjar.weixin.cp.bean.WxCpTpUnionidToExternalUseridResult;
@@ -30,7 +31,18 @@ public interface WxCpTpIdConvertService {
   WxCpTpUnionidToExternalUseridResult unionidToExternalUserid(String cropId, String unionid, String openid,
                                                               Integer subjectType) throws WxErrorException;
 
+  /**
+   * external_userid与pending_id的关联
+   * <a href="https://developer.work.weixin.qq.com/document/path/95900#external_userid%E6%9F%A5%E8%AF%A2pending_id">查看文档</a>
+   *
+   * @param chatId      群id，如果有传入该参数，则只检查群主是否在可见范围，同时会忽略在该群以外的external_userid
+   * @param externalUserid     企业主体下的externalUserid。最多支持100个
+   * 
+   * @throws WxErrorException 。
+   */
+  WxCpTpExternalUseridToPendingidResult externalUseridToPendingid(String cropId, String chatId, String... externalUerid) throws WxErrorException;
 
+  
   /**
    * 将企业主体下的客户标签ID转换成服务商主体下的客户标签ID
    * @param corpId             企业微信 ID

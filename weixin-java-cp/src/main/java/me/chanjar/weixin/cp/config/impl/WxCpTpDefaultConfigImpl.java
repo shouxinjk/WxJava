@@ -207,6 +207,16 @@ public class WxCpTpDefaultConfigImpl implements WxCpTpConfigStorage, Serializabl
   public void setSuiteSecret(String corpSecret) {
     this.suiteSecret = corpSecret;
   }
+  
+  /**
+   * Sets provider secret.
+   *
+   * @param providerSecret the provider secret
+   */
+  @Deprecated
+  public void setProviderSecret(String providerSecret) {
+    this.providerSecret = providerSecret;
+  }
 
   @Override
   public String getToken() {

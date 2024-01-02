@@ -58,6 +58,11 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   private WxCpTpLicenseService wxCpTpLicenseService = new WxCpTpLicenseServiceImpl(this);
   private WxCpTpIdConvertService wxCpTpIdConvertService = new WxCpTpIdConvertServiceImpl(this);
   private WxCpTpOAuth2Service wxCpTpOAuth2Service = new WxCpTpOAuth2ServiceImpl(this);
+  
+  private WxCpTpExternalContactService wxCpTpExternalContactService = new WxCpTpExternalContactServiceImpl(this);
+  private WxCpTpMessageService wxCpTpMessageService = new WxCpTpMessageServiceImpl(this);
+  private WxCpTpGroupRobotService wxCpTpGroupRobotService = new WxCpTpGroupRobotServiceImpl(this);
+  private WxCpTpKfService wxCpTpKfService = new WxCpTpKfServiceImpl(this);
   /**
    * 全局的是否正在刷新access token的锁.
    */
@@ -327,6 +332,61 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   public String post(String url, String postData) throws WxErrorException {
     return execute(SimplePostRequestExecutor.create(this), url, postData, false);
   }
+  
+  //added by ilife
+  @Override
+  public String post(String url, JsonObject postData) throws WxErrorException {
+	return this.post(url, postData.toString());
+  }
+  @Override
+  public String post(String url, Object obj) throws WxErrorException {
+    return this.post(url, obj.toString());
+  }
+  @Override
+  public String postWithoutToken(String url, String postData) throws WxErrorException {
+    return this.post(url, postData, true);
+  }
+  
+  @Override
+  public WxCpTpExternalContactService getWxCpTpExternalContactService() {
+    return wxCpTpExternalContactService;
+  }
+
+  @Override
+  public void setWxCpTpExternalContactService(WxCpTpExternalContactService wxCpTpExternalContactService) {
+    this.wxCpTpExternalContactService = wxCpTpExternalContactService;
+  }
+  
+  @Override
+  public WxCpTpMessageService getWxCpTpMessageService() {
+    return wxCpTpMessageService;
+  }
+
+  @Override
+  public void setWxCpTpMessageService(WxCpTpMessageService wxCpTpMessageService) {
+    this.wxCpTpMessageService = wxCpTpMessageService;
+  }
+  
+  @Override
+  public WxCpTpGroupRobotService getWxCpTpGroupRobotService() {
+    return wxCpTpGroupRobotService;
+  }
+
+  @Override
+  public void setWxCpTpKfService(WxCpTpKfService wxCpTpKfService) {
+    this.wxCpTpKfService = wxCpTpKfService;
+  }
+  
+  @Override
+  public WxCpTpKfService getWxCpTpKfService() {
+    return wxCpTpKfService;
+  }
+
+  @Override
+  public void setWxCpTpGroupRobotService(WxCpTpGroupRobotService wxCpTpGroupRobotService) {
+    this.wxCpTpGroupRobotService = wxCpTpGroupRobotService;
+  }
+  //end of ilife
 
   /**
    * Post string.

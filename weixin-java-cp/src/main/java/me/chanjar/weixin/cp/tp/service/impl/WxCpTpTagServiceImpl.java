@@ -17,6 +17,8 @@ import me.chanjar.weixin.cp.util.json.WxCpGsonBuilder;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Tag.*;
 
 /**
@@ -30,7 +32,7 @@ import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Tag.*;
 @RequiredArgsConstructor
 public class WxCpTpTagServiceImpl implements WxCpTpTagService {
   private final WxCpTpService mainService;
-
+	
   @Override
   public String create(String name, Integer id) throws WxErrorException {
     JsonObject o = new JsonObject();

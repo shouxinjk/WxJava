@@ -7,10 +7,13 @@ import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.common.util.http.MediaUploadRequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestHttp;
+import me.chanjar.weixin.common.util.http.SimplePostRequestExecutor;
 import me.chanjar.weixin.cp.bean.*;
 import me.chanjar.weixin.cp.config.WxCpTpConfigStorage;
 
 import java.util.List;
+
+import com.google.gson.JsonObject;
 
 /**
  * 企业微信第三方应用API的Service.
@@ -285,7 +288,33 @@ public interface WxCpTpService {
    * @throws WxErrorException the wx error exception
    */
   String post(String url, String postData) throws WxErrorException;
-
+  
+  //added by ilife
+  String post(String url, JsonObject postData) throws WxErrorException; 
+  String post(String url, Object obj) throws WxErrorException; 
+  String postWithoutToken(String url, String postData) throws WxErrorException;
+  /**
+   * 外部联系接口
+   */
+  WxCpTpExternalContactService getWxCpTpExternalContactService();
+  void setWxCpTpExternalContactService(WxCpTpExternalContactService wxCpTpExternalContactService);
+  /**
+   * 消息推送接口
+   */
+  public WxCpTpMessageService getWxCpTpMessageService();
+  public void setWxCpTpMessageService(WxCpTpMessageService wxCpTpMessageService);
+  /**
+   * 群机器人接口
+   */
+  WxCpTpGroupRobotService getWxCpTpGroupRobotService();
+  void setWxCpTpGroupRobotService(WxCpTpGroupRobotService wxCpTpGroupRobotService);
+  /**
+   * 客服消息接口
+   */
+  WxCpTpKfService getWxCpTpKfService();
+  void setWxCpTpKfService(WxCpTpKfService wxCpTpKfService);
+  //end of ilife
+  
   /**
    * <pre>
    * Service没有实现某个API的时候，可以用这个，

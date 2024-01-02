@@ -35,6 +35,12 @@ public class WxMpKefuMessage implements Serializable {
   private String miniProgramPagePath;
   private String headContent;
   private String tailContent;
+  
+  //ilife:支持客服Link消息
+  private String desc;
+  private String url;
+  //
+  
   private List<WxArticle> articles = new ArrayList<>();
   private String mpNewsArticleId;
 
@@ -50,6 +56,13 @@ public class WxMpKefuMessage implements Serializable {
     return new TextBuilder();
   }
 
+  /**
+   * 获得链接消息builder.
+   */
+  public static LinkBuilder LINK() {
+    return new LinkBuilder();
+  }
+  
   /**
    * 获得图片消息builder.
    */
