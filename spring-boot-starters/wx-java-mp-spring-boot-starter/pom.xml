@@ -5,11 +5,7 @@
   <parent>
     <artifactId>wx-java-spring-boot-starters</artifactId>
     <groupId>com.github.binarywang</groupId>
-<<<<<<< HEAD
-    <version>4.5.4.B-ilife</version>
-=======
-    <version>4.6.0</version>
->>>>>>> 8610c0f0af8ddb4ea1dd8cee8e2974e548e07ffc
+    <version>4.6.0-ilife</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
