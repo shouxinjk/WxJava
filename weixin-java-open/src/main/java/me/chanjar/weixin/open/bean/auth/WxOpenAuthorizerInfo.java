@@ -18,6 +18,7 @@ public class WxOpenAuthorizerInfo implements Serializable {
   private String headImg;
   private Integer serviceTypeInfo;
   private Integer verifyTypeInfo;
+  private Integer channelsInfo; //ilife
   private String userName;
   private String principalName;
   private Map<String, Integer> businessInfo;

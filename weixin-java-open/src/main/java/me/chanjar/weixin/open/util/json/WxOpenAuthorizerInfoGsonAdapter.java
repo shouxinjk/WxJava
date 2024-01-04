@@ -17,6 +17,7 @@ public class WxOpenAuthorizerInfoGsonAdapter implements JsonDeserializer<WxOpenA
   private static final String SERVICE_TYPE_INFO = "service_type_info";
   private static final String MINI_PROGRAM_INFO = "MiniProgramInfo";
   private static final String BASIC_CONFIG = "basic_config";
+  private static final String CHANNELS_INFO = "channels_info";
 
   @Override
   public WxOpenAuthorizerInfo deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
@@ -44,6 +45,12 @@ public class WxOpenAuthorizerInfoGsonAdapter implements JsonDeserializer<WxOpenA
         new TypeToken<WxOpenAuthorizerInfo.BasicConfig>(){
         }.getType()));
     }
+    //ilife: add channels_info
+    if (jsonObject.has(CHANNELS_INFO)) {
+        authorizationInfo.setChannelsInfo(GsonHelper.getInteger(jsonObject.getAsJsonObject(CHANNELS_INFO), "id"));
+      }
+    //end
+    
     Map<String, Integer> businessInfo = WxOpenGsonBuilder.create().fromJson(jsonObject.get("business_info"),
       new TypeToken<Map<String, Integer>>() {
       }.getType());
