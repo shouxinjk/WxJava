@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.bean.result.WxMediaUploadResult;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.util.fs.FileUtils;
+import me.chanjar.weixin.common.util.http.BaseMediaDownloadRequestExecutor;
 import me.chanjar.weixin.common.util.http.MediaUploadRequestExecutor;
 import me.chanjar.weixin.cp.tp.service.WxCpTpMediaService;
 import me.chanjar.weixin.cp.tp.service.WxCpTpService;
@@ -13,8 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 
-import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Media.IMG_UPLOAD;
-import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Media.MEDIA_UPLOAD;
+import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Media.*;
 
 /**
  * <pre>
@@ -46,5 +46,14 @@ public class WxCpTpMediaServiceImpl implements WxCpTpMediaService {
     url += "?access_token=" + mainService.getWxCpTpConfigStorage().getAccessToken(corpId);
     return this.mainService.execute(MediaUploadRequestExecutor.create(this.mainService.getRequestHttp()), url, file)
       .getUrl();
+  }
+
+  @Override
+  public File download(String mediaId, String corpId) throws WxErrorException {
+    String url = mainService.getWxCpTpConfigStorage().getApiUrl(MEDIA_GET);
+    url += "?access_token=" + mainService.getWxCpTpConfigStorage().getAccessToken(corpId);
+    File tmpDirFile = mainService.getWxCpTpConfigStorage().getTmpDirFile();
+    return this.mainService.execute(BaseMediaDownloadRequestExecutor.create(this.mainService.getRequestHttp(),tmpDirFile),
+      url,"media_id=" + mediaId);
   }
 }

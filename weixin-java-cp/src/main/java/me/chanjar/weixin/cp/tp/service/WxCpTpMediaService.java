@@ -67,4 +67,17 @@ public interface WxCpTpMediaService {
    * @throws WxErrorException 异常信息
    */
   String uploadImg(File file, String corpId) throws WxErrorException;
+
+  /**
+   * <pre>
+   * 下载临时素材.
+   * 接口url格式：https://qyapi.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID
+   * </pre>
+   *
+   * @param mediaId 临时素材id
+   * @param corpId 授权企业的corpid
+   * @return 返回文件对象 file
+   * @throws WxErrorException 异常信息
+   */
+  File download(String mediaId, String corpId) throws WxErrorException;
 }
