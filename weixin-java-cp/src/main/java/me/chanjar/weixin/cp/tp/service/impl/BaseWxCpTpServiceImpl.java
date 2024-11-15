@@ -58,11 +58,12 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   private WxCpTpLicenseService wxCpTpLicenseService = new WxCpTpLicenseServiceImpl(this);
   private WxCpTpIdConvertService wxCpTpIdConvertService = new WxCpTpIdConvertServiceImpl(this);
   private WxCpTpOAuth2Service wxCpTpOAuth2Service = new WxCpTpOAuth2ServiceImpl(this);
-  
+
   private WxCpTpExternalContactService wxCpTpExternalContactService = new WxCpTpExternalContactServiceImpl(this);
   private WxCpTpMessageService wxCpTpMessageService = new WxCpTpMessageServiceImpl(this);
   private WxCpTpGroupRobotService wxCpTpGroupRobotService = new WxCpTpGroupRobotServiceImpl(this);
   private WxCpTpKfService wxCpTpKfService = new WxCpTpKfServiceImpl(this);
+  private WxCpTpOaWeDriveService wxCpOaWeDriveService = new WxCpTpOaWeDriveServiceImpl(this);
   /**
    * 全局的是否正在刷新access token的锁.
    */
@@ -332,7 +333,7 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   public String post(String url, String postData) throws WxErrorException {
     return execute(SimplePostRequestExecutor.create(this), url, postData, false);
   }
-  
+
   //added by ilife
   @Override
   public String post(String url, JsonObject postData) throws WxErrorException {
@@ -346,7 +347,7 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   public String postWithoutToken(String url, String postData) throws WxErrorException {
     return this.post(url, postData, true);
   }
-  
+
   @Override
   public WxCpTpExternalContactService getWxCpTpExternalContactService() {
     return wxCpTpExternalContactService;
@@ -356,7 +357,7 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   public void setWxCpTpExternalContactService(WxCpTpExternalContactService wxCpTpExternalContactService) {
     this.wxCpTpExternalContactService = wxCpTpExternalContactService;
   }
-  
+
   @Override
   public WxCpTpMessageService getWxCpTpMessageService() {
     return wxCpTpMessageService;
@@ -366,7 +367,7 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   public void setWxCpTpMessageService(WxCpTpMessageService wxCpTpMessageService) {
     this.wxCpTpMessageService = wxCpTpMessageService;
   }
-  
+
   @Override
   public WxCpTpGroupRobotService getWxCpTpGroupRobotService() {
     return wxCpTpGroupRobotService;
@@ -376,7 +377,7 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   public void setWxCpTpKfService(WxCpTpKfService wxCpTpKfService) {
     this.wxCpTpKfService = wxCpTpKfService;
   }
-  
+
   @Override
   public WxCpTpKfService getWxCpTpKfService() {
     return wxCpTpKfService;
@@ -822,5 +823,11 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   @Override
   public void setWxCpTpOAuth2Service(WxCpTpOAuth2Service wxCpTpOAuth2Service) {
     this.wxCpTpOAuth2Service = wxCpTpOAuth2Service;
+  }
+
+
+  @Override
+  public WxCpTpOaWeDriveService getOaWeDriveService() {
+    return wxCpOaWeDriveService;
   }
 }
