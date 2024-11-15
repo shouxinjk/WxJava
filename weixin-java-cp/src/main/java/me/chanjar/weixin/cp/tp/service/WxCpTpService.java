@@ -671,5 +671,6 @@ public interface WxCpTpService {
    *
    * @return oa we drive service
    */
-  WxCpTpOaWeDriveService getOaWeDriveService();
+  WxCpTpOaWeDriveService getWxCpTpOaWeDriveService();
+  void setWxCpTpOaWeDriveService(WxCpTpOaWeDriveService wxCpTpOaWeDriveService);
 }
