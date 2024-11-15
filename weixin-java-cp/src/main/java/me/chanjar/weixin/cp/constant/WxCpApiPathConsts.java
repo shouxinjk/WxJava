@@ -462,6 +462,18 @@ public interface WxCpApiPathConsts {
      */
     String FILE_UPLOAD = "/cgi-bin/wedrive/file_upload";
     /**
+     * The constant FILE_UPLOAD_INIT. 分块上传初始化
+     */
+    String FILE_UPLOAD_INIT = "/cgi-bin/wedrive/file_upload_init";
+    /**
+     * The constant FILE_UPLOAD_PART. 分块上传文件
+     */
+    String FILE_UPLOAD_PART = "/cgi-bin/wedrive/file_upload_part";
+    /**
+     * The constant FILE_UPLOAD_FINISH. 分块上传完成
+     */
+    String FILE_UPLOAD_FINISH = "/cgi-bin/wedrive/file_upload_finish";
+    /**
      * The constant FILE_DOWNLOAD.
      */
     String FILE_DOWNLOAD = "/cgi-bin/wedrive/file_download";
@@ -1526,13 +1538,13 @@ public interface WxCpApiPathConsts {
      * 该接口有调用频率限制，当subject_type为0时，按企业作如下的限制：10万次/小时、48万次/天、750万次/月
      */
     String EXTERNAL_USERID_TO_PENDING_ID = "/cgi-bin/idconvert/batch/external_userid_to_pending_id";
-    
+
     /**
      * 将微信客户的external_userid转为pending_id
      * 本接口获取到的pending_id可以维持unionid和external_userid的关联关系。pending_id有效期为90天，超过有效期之后，将无法通过该接口将external_userid换取对应的pending_id。
      */
     String UNION_ID_TO_EXTERNAL_USER_ID = "/cgi-bin/idconvert/unionid_to_external_userid";
-    
+
     /**
      * 将企业主体下的微信客服ID转换成服务商主体下的微信客服ID
      */

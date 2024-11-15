@@ -1,5 +1,6 @@
 package me.chanjar.weixin.cp.tp.service;
 
+import com.google.gson.JsonObject;
 import me.chanjar.weixin.common.bean.WxAccessToken;
 import me.chanjar.weixin.common.bean.WxJsapiSignature;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -7,13 +8,10 @@ import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.common.util.http.MediaUploadRequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestExecutor;
 import me.chanjar.weixin.common.util.http.RequestHttp;
-import me.chanjar.weixin.common.util.http.SimplePostRequestExecutor;
 import me.chanjar.weixin.cp.bean.*;
 import me.chanjar.weixin.cp.config.WxCpTpConfigStorage;
 
 import java.util.List;
-
-import com.google.gson.JsonObject;
 
 /**
  * 企业微信第三方应用API的Service.
@@ -288,10 +286,10 @@ public interface WxCpTpService {
    * @throws WxErrorException the wx error exception
    */
   String post(String url, String postData) throws WxErrorException;
-  
+
   //added by ilife
-  String post(String url, JsonObject postData) throws WxErrorException; 
-  String post(String url, Object obj) throws WxErrorException; 
+  String post(String url, JsonObject postData) throws WxErrorException;
+  String post(String url, Object obj) throws WxErrorException;
   String postWithoutToken(String url, String postData) throws WxErrorException;
   /**
    * 外部联系接口
@@ -314,7 +312,7 @@ public interface WxCpTpService {
   WxCpTpKfService getWxCpTpKfService();
   void setWxCpTpKfService(WxCpTpKfService wxCpTpKfService);
   //end of ilife
-  
+
   /**
    * <pre>
    * Service没有实现某个API的时候，可以用这个，
@@ -668,4 +666,10 @@ public interface WxCpTpService {
 
   void setWxCpTpOAuth2Service(WxCpTpOAuth2Service wxCpTpOAuth2Service);
 
+  /**
+   * 获取OA效率工具 微盘的服务类对象
+   *
+   * @return oa we drive service
+   */
+  WxCpTpOaWeDriveService getOaWeDriveService();
 }
