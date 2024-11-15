@@ -63,7 +63,7 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   private WxCpTpMessageService wxCpTpMessageService = new WxCpTpMessageServiceImpl(this);
   private WxCpTpGroupRobotService wxCpTpGroupRobotService = new WxCpTpGroupRobotServiceImpl(this);
   private WxCpTpKfService wxCpTpKfService = new WxCpTpKfServiceImpl(this);
-  private WxCpTpOaWeDriveService wxCpOaWeDriveService = new WxCpTpOaWeDriveServiceImpl(this);
+  private WxCpTpOaWeDriveService oaWeDriveService = new WxCpTpOaWeDriveServiceImpl(this);
   /**
    * 全局的是否正在刷新access token的锁.
    */
@@ -828,6 +828,6 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
 
   @Override
   public WxCpTpOaWeDriveService getOaWeDriveService() {
-    return wxCpOaWeDriveService;
+    return oaWeDriveService;
   }
 }
