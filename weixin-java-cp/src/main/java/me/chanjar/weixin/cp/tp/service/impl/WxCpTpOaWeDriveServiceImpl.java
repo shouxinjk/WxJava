@@ -138,12 +138,14 @@ public class WxCpTpOaWeDriveServiceImpl implements WxCpTpOaWeDriveService {
   }
 
   @Override
-  public WxCpFileCreate fileCreate(@NonNull String userId, @NonNull String spaceId, @NonNull String fatherId,
+  public WxCpFileCreate fileCreate(String userId, @NonNull String spaceId, @NonNull String fatherId,
                                    @NonNull Integer fileType, @NonNull String fileName, String corpId) throws WxErrorException {
     String apiUrl = mainService.getWxCpTpConfigStorage().getApiUrl(FILE_CREATE);
     apiUrl = apiUrl + "?access_token=" + mainService.getWxCpTpConfigStorage().getAccessToken(corpId);
     JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("userid", userId);
+    if(userId!= null) {
+      jsonObject.addProperty("userid", userId);
+    }
     jsonObject.addProperty("spaceid", spaceId);
     jsonObject.addProperty("fatherid", fatherId);
     jsonObject.addProperty("file_type", fileType);
@@ -202,11 +204,13 @@ public class WxCpTpOaWeDriveServiceImpl implements WxCpTpOaWeDriveService {
   }
 
   @Override
-  public WxCpFileShare fileShare(@NonNull String userId, @NonNull String fileId, String corpId) throws WxErrorException {
+  public WxCpFileShare fileShare(String userId, @NonNull String fileId, String corpId) throws WxErrorException {
     String apiUrl = mainService.getWxCpTpConfigStorage().getApiUrl(FILE_SHARE);
     apiUrl = apiUrl + "?access_token=" + mainService.getWxCpTpConfigStorage().getAccessToken(corpId);
     JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("userid", userId);
+    if(userId != null) {
+      jsonObject.addProperty("userid", userId);
+    }
     jsonObject.addProperty("fileid", fileId);
     String responseContent = this.mainService.post(apiUrl, jsonObject.toString());
     return WxCpFileShare.fromJson(responseContent);

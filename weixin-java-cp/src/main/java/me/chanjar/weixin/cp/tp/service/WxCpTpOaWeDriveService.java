@@ -205,7 +205,7 @@ public interface WxCpTpOaWeDriveService {
    * @return wx cp file create
    * @throws WxErrorException the wx error exception
    */
-  WxCpFileCreate fileCreate(@NonNull String userId, @NonNull String spaceId,
+  WxCpFileCreate fileCreate(String userId, @NonNull String spaceId,
                             @NonNull String fatherId, @NonNull Integer fileType, @NonNull String fileName, String corpId) throws WxErrorException;
 
   /**
@@ -296,14 +296,14 @@ public interface WxCpTpOaWeDriveService {
    * @return wx cp file share
    * @throws WxErrorException the wx error exception
    */
-  WxCpFileShare fileShare(@NonNull String userId, @NonNull String fileId, String corpId) throws WxErrorException;
+  WxCpFileShare fileShare(String userId, @NonNull String fileId, String corpId) throws WxErrorException;
 
   /**
    * 文件信息
    * 该接口用于获取指定文件的信息。
    * <p>
    * 请求方式：POST（HTTPS）
-   * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedrive/file_info?access_token=ACCESS_TOKEN
+   * 请求地址: https://qyapi.weixin.qq.com/cgfile_createi-bin/wedrive/file_info?access_token=ACCESS_TOKEN
    *
    * @param userId the user id
    * @param fileId the file id
