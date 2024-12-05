@@ -114,11 +114,13 @@ public class WxCpTpOaWeDriveServiceImpl implements WxCpTpOaWeDriveService {
   }
 
   @Override
-  public WxCpFileDownload fileDownload(@NonNull String userId, @NonNull String fileId, String corpId) throws WxErrorException {
+  public WxCpFileDownload fileDownload(String userId, @NonNull String fileId, String corpId) throws WxErrorException {
     String apiUrl = mainService.getWxCpTpConfigStorage().getApiUrl(FILE_DOWNLOAD);
     apiUrl = apiUrl + "?access_token=" + mainService.getWxCpTpConfigStorage().getAccessToken(corpId);
     JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("userid", userId);
+    if(userId!= null) {
+      jsonObject.addProperty("userid", userId);
+    }
     jsonObject.addProperty("fileid", fileId);
     String responseContent = this.mainService.post(apiUrl, jsonObject.toString());
     return WxCpFileDownload.fromJson(responseContent);

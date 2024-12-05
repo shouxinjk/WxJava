@@ -171,7 +171,7 @@ public interface WxCpTpOaWeDriveService {
    * @return wx cp file download
    * @throws WxErrorException the wx error exception
    */
-  WxCpFileDownload fileDownload(@NonNull String userId, @NonNull String fileId, String corpId) throws WxErrorException;
+  WxCpFileDownload fileDownload(String userId, @NonNull String fileId, String corpId) throws WxErrorException;
 
   /**
    * 重命名文件
