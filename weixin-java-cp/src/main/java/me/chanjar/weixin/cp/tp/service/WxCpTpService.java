@@ -673,4 +673,12 @@ public interface WxCpTpService {
    */
   WxCpTpOaWeDriveService getWxCpTpOaWeDriveService();
   void setWxCpTpOaWeDriveService(WxCpTpOaWeDriveService wxCpTpOaWeDriveService);
+
+  /**
+   * 获取OA效率工具 文档的服务类对象
+   *
+   * @return oa we doc service
+   */
+  WxCpTpOaWeDocService getWxCpTpOaWeDocService();
+  void setWxCpTpOaWeDocService(WxCpTpOaWeDocService wxCpTpOaWeDocService);
 }
