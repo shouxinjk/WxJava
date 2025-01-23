@@ -543,6 +543,30 @@ public interface WxCpApiPathConsts {
      * The constant WEDOC_DOC_SHARE.
      */
     String WEDOC_DOC_SHARE = "/cgi-bin/wedoc/doc_share";
+    /**
+     * The constant WEDOC_DOC_GET.
+     */
+    String WEDOC_DOC_GET = "/cgi-bin/wedoc/document/get";
+    /**
+     * The constant WEDOC_DOC_SMART_SHEET_ADD.
+     */
+    String WEDOC_DOC_SMART_SHEET_ADD = "/cgi-bin/wedoc/smartsheet/add_sheet";
+    /**
+     * The constant WEDOC_DOC_SMART_SHEET_UPDATE.
+     */
+    String WEDOC_DOC_SMART_SHEET_UPDATE = "/cgi-bin/wedoc/smartsheet/update_sheet";
+    /**
+     * The constant WEDOC_DOC_SMART_SHEET_ADD_FIELDS.
+     */
+    String WEDOC_DOC_SMART_SHEET_ADD_FIELDS = "/cgi-bin/wedoc/smartsheet/add_fields";
+    /**
+     * The constant WEDOC_DOC_SMART_SHEET_UPDATE_FIELDS.
+     */
+    String WEDOC_DOC_SMART_SHEET_UPDATE_FIELDS = "/cgi-bin/wedoc/smartsheet/update_fields";
+    /**
+     * The constant WEDOC_DOC_SMART_SHEET_DEL_FIELDS.
+     */
+    String WEDOC_DOC_SMART_SHEET_DEL_FIELDS = "/cgi-bin/wedoc/smartsheet/delete_fields";
   }
 
   /**

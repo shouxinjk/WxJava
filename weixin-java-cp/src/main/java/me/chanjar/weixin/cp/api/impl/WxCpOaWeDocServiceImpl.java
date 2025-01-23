@@ -63,4 +63,13 @@ public class WxCpOaWeDocServiceImpl implements WxCpOaWeDocService {
     String responseContent = this.cpService.post(apiUrl, jsonObject.toString());
     return WxCpDocShare.fromJson(responseContent);
   }
+
+  @Override
+  public WxCpDocData getDocData(@NonNull String docId) throws WxErrorException {
+    String apiUrl = this.cpService.getWxCpConfigStorage().getApiUrl(WEDOC_DOC_GET);
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("docid", docId);
+    String responseContent = this.cpService.post(apiUrl, jsonObject.toString());
+    return WxCpDocData.fromJson(responseContent);
+  }
 }

@@ -78,4 +78,15 @@ public interface WxCpOaWeDocService {
    * @throws WxErrorException the wx error exception
    */
   WxCpDocShare docShare(@NonNull String docId) throws WxErrorException;
+
+  /**
+   * 获取文档数据
+   * 该接口用于获取文档数据
+   * 请求方式：POST（HTTPS）
+   * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedoc/document/get?access_token=ACCESS_TOKEN
+   * @param docId
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpDocData getDocData(@NonNull String docId) throws WxErrorException;
 }

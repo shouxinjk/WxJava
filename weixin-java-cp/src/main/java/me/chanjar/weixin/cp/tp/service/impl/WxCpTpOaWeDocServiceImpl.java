@@ -13,7 +13,7 @@ import me.chanjar.weixin.cp.tp.service.WxCpTpService;
 import static me.chanjar.weixin.cp.constant.WxCpApiPathConsts.Oa.*;
 
 /**
- * 企业微信微盘接口实现类.
+ * 企业微信文档接口实现类.
  *
  * @author Wang_Wong  created on  2022-04-22
  */
@@ -67,5 +67,55 @@ public class WxCpTpOaWeDocServiceImpl implements WxCpTpOaWeDocService {
     jsonObject.addProperty("docid", docId);
     String responseContent = this.mainService.post(apiUrl, jsonObject.toString());
     return WxCpDocShare.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpDocData getDocData(@NonNull String docId, @NonNull String corpId) throws WxErrorException {
+    String apiUrl = mainService.getWxCpTpConfigStorage().getApiUrl(WEDOC_DOC_GET);
+    apiUrl = apiUrl + "?access_token=" + mainService.getWxCpTpConfigStorage().getAccessToken(corpId);
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("docid", docId);
+    String responseContent = this.mainService.post(apiUrl, jsonObject.toString());
+    return WxCpDocData.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpDocSmartSheetCreatData addSheet(WxCpDocSmartSheetCreatRequest request, @NonNull String corpId) throws WxErrorException {
+    String apiUrl = mainService.getWxCpTpConfigStorage().getApiUrl(WEDOC_DOC_SMART_SHEET_ADD);
+    apiUrl = apiUrl + "?access_token=" + mainService.getWxCpTpConfigStorage().getAccessToken(corpId);
+    String responseContent = this.mainService.post(apiUrl, request.toJson());
+    return WxCpDocSmartSheetCreatData.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpDocSmartSheetCreatData updateSheet(WxCpDocSmartSheetCreatRequest request, @NonNull String corpId) throws WxErrorException {
+    String apiUrl = mainService.getWxCpTpConfigStorage().getApiUrl(WEDOC_DOC_SMART_SHEET_UPDATE);
+    apiUrl = apiUrl + "?access_token=" + mainService.getWxCpTpConfigStorage().getAccessToken(corpId);
+    String responseContent = this.mainService.post(apiUrl, request.toJson());
+    return WxCpDocSmartSheetCreatData.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpDocSmartSheetCreateFieldsData addFields(WxCpDocSmartSheetCreateFieldsRequest request, @NonNull String corpId) throws WxErrorException {
+    String apiUrl = mainService.getWxCpTpConfigStorage().getApiUrl(WEDOC_DOC_SMART_SHEET_ADD_FIELDS);
+    apiUrl = apiUrl + "?access_token=" + mainService.getWxCpTpConfigStorage().getAccessToken(corpId);
+    String responseContent = this.mainService.post(apiUrl, request.toJson());
+    return WxCpDocSmartSheetCreateFieldsData.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpDocSmartSheetCreateFieldsData updateFields(WxCpDocSmartSheetCreateFieldsRequest request, @NonNull String corpId) throws WxErrorException {
+    String apiUrl = mainService.getWxCpTpConfigStorage().getApiUrl(WEDOC_DOC_SMART_SHEET_UPDATE_FIELDS);
+    apiUrl = apiUrl + "?access_token=" + mainService.getWxCpTpConfigStorage().getAccessToken(corpId);
+    String responseContent = this.mainService.post(apiUrl, request.toJson());
+    return WxCpDocSmartSheetCreateFieldsData.fromJson(responseContent);
+  }
+
+  @Override
+  public WxCpBaseResp delFields(WxCpDocSmartSheetDelFieldsRequest request, @NonNull String corpId) throws WxErrorException {
+    String apiUrl = mainService.getWxCpTpConfigStorage().getApiUrl(WEDOC_DOC_SMART_SHEET_DEL_FIELDS);
+    apiUrl = apiUrl + "?access_token=" + mainService.getWxCpTpConfigStorage().getAccessToken(corpId);
+    String responseContent = this.mainService.post(apiUrl, request.toJson());
+    return WxCpBaseResp.fromJson(responseContent);
   }
 }

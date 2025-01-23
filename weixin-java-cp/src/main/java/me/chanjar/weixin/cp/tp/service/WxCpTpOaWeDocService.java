@@ -83,4 +83,76 @@ public interface WxCpTpOaWeDocService {
    * @throws WxErrorException the wx error exception
    */
   WxCpDocShare docShare(@NonNull String docId, String corpId) throws WxErrorException;
+
+  /**
+   * 获取文档数据
+   * 该接口用于获取文档数据
+   * 请求方式：POST（HTTPS）
+   * 请求地址: https://qyapi.weixin.qq.com/cgi-bin/wedoc/document/get?access_token=ACCESS_TOKEN
+   * @param docId
+   * @param corpId
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpDocData getDocData(@NonNull String docId, @NonNull String corpId) throws WxErrorException;
+
+  /**
+   * 智能表格添加子表
+   * 本接口用于在表格的某个位置添加一个智能表，该智能表不存在视图、记录和字段，可以使用 API 在该智能表中添加视图、记录和字段。
+   * 请求方式：POST(HTTPS)
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/wedoc/smartsheet/add_sheet?access_token=ACCESS_TOKEN
+   * @param request
+   * @param corpId
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpDocSmartSheetCreatData addSheet(WxCpDocSmartSheetCreatRequest request, @NonNull String corpId) throws WxErrorException;
+
+  /**
+   * 智能表格修改子表
+   * 本接口用于修改表格中某个子表的标题。
+   * 请求方式：POST(HTTPS)
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/wedoc/smartsheet/update_sheet?access_token=ACCESS_TOKEN
+   * @param request
+   * @param corpId
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpDocSmartSheetCreatData updateSheet(WxCpDocSmartSheetCreatRequest request, @NonNull String corpId) throws WxErrorException;
+
+  /**
+   * 智能表格添加字段
+   * 本接口用于在智能表中的某个子表里添加一列或多列新字段。单表最多允许有150个字段。。
+   * 请求方式：POST(HTTPS)
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/wedoc/smartsheet/add_fields?access_token=ACCESS_TOKEN
+   * @param request
+   * @param corpId
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpDocSmartSheetCreateFieldsData addFields(WxCpDocSmartSheetCreateFieldsRequest request, @NonNull String corpId) throws WxErrorException;
+
+  /**
+   * 智能表格更新字段
+   * 本接口用于更新智能中的某个子表里的一个或多个字段的标题和字段属性信息。
+   * 请求方式：POST(HTTPS)
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/wedoc/smartsheet/update_fields?access_token=ACCESS_TOKEN
+   * @param request
+   * @param corpId
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpDocSmartSheetCreateFieldsData updateFields(WxCpDocSmartSheetCreateFieldsRequest request, @NonNull String corpId) throws WxErrorException;
+
+  /**
+   * 智能表格删除字段
+   * 本接口用于删除智能表中的某个子表里的一列或多列字段。
+   * 请求方式：POST(HTTPS)
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/wedoc/smartsheet/delete_fields?access_token=ACCESS_TOKEN
+   * @param request
+   * @param corpId
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpBaseResp delFields(WxCpDocSmartSheetDelFieldsRequest request, @NonNull String corpId) throws WxErrorException;
 }
