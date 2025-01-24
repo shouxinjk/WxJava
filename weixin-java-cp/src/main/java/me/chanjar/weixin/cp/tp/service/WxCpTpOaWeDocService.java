@@ -155,4 +155,17 @@ public interface WxCpTpOaWeDocService {
    * @throws WxErrorException
    */
   WxCpBaseResp delFields(WxCpDocSmartSheetDelFieldsRequest request, @NonNull String corpId) throws WxErrorException;
+
+  /**
+   * 智能表格查询记录
+   * 本接口用于获取 Smartsheet 中某个子表下记录信息，
+   * 该接口可以完成下面三种功能：获取全部记录信息、依据字段名和记录 ID 获取对应记录、对记录进行排序。。
+   * 请求方式：POST(HTTPS)
+   * 请求地址：https://qyapi.weixin.qq.com/cgi-bin/wedoc/smartsheet/get_records?access_token=ACCESS_TOKEN
+   * @param request
+   * @param corpId
+   * @return
+   * @throws WxErrorException
+   */
+  WxCpDocGetRecordsData getRecords(WxCpDocGetRecordsRequest request, @NonNull String corpId) throws WxErrorException;
 }
