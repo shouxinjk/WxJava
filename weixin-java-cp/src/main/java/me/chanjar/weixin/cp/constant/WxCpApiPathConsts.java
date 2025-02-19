@@ -568,9 +568,17 @@ public interface WxCpApiPathConsts {
      */
     String WEDOC_DOC_SMART_SHEET_DEL_FIELDS = "/cgi-bin/wedoc/smartsheet/delete_fields";
     /**
+     * The constant WEDOC_DOC_SMART_SHEET_GET_FIELDS.
+     */
+    String WEDOC_DOC_SMART_SHEET_GET_FIELDS = "/cgi-bin/wedoc/smartsheet/get_fields";
+    /**
      * The constant WEDOC_DOC_SMART_SHEET_GET_RECORDS.
      */
     String WEDOC_DOC_SMART_SHEET_GET_RECORDS = "/cgi-bin/wedoc/smartsheet/get_records";
+    /**
+     * The constant WEDOC_DOC_SMART_SHEET_ADD_RECORDS.
+     */
+    String WEDOC_DOC_SMART_SHEET_ADD_RECORDS = "/cgi-bin/wedoc/smartsheet/add_records";
   }
 
   /**

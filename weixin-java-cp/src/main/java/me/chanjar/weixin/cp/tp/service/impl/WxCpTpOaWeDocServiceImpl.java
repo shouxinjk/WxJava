@@ -126,4 +126,12 @@ public class WxCpTpOaWeDocServiceImpl implements WxCpTpOaWeDocService {
     String responseContent = this.mainService.post(apiUrl, request.toJson());
     return WxCpDocGetRecordsData.fromJson(responseContent);
   }
+
+  @Override
+  public WxCpDocSmartSheetCreateFieldsData getFields(WxCpDocSmartSheetGetFieldsRequest request, @NonNull String corpId) throws WxErrorException {
+    String apiUrl = mainService.getWxCpTpConfigStorage().getApiUrl(WEDOC_DOC_SMART_SHEET_GET_FIELDS);
+    apiUrl = apiUrl + "?access_token=" + mainService.getWxCpTpConfigStorage().getAccessToken(corpId);
+    String responseContent = this.mainService.post(apiUrl, request.toJson());
+    return WxCpDocSmartSheetCreateFieldsData.fromJson(responseContent);
+  }
 }
