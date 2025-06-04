@@ -50,6 +50,12 @@ public class WxCpKfAccountListResp extends WxCpBaseResp {
      */
     @SerializedName("avatar")
     private String avatar;
+
+    /**
+     * 当前调用接口的应用身份，是否有该客服账号的管理权限
+     */
+    @SerializedName("manage_privilege")
+    private Boolean managePrivilege;
   }
 
   /**
