@@ -71,6 +71,10 @@ public class WxConsts {
      */
     public static final String IMAGE = "image";
     /**
+     * 图文链接消息.
+     */
+    public static final String LINK = "link";
+    /**
      * 语音消息.
      */
     public static final String VOICE = "voice";

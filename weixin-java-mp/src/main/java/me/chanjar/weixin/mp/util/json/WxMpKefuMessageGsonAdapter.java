@@ -27,6 +27,14 @@ public class WxMpKefuMessageGsonAdapter implements JsonSerializer<WxMpKefuMessag
         image.addProperty("media_id", message.getMediaId());
         messageJson.add("image", image);
         break;
+      case KefuMsgType.LINK:
+        JsonObject link = new JsonObject();
+        link.addProperty("title", message.getTitle());
+        link.addProperty("description", message.getDesc());
+        link.addProperty("url", message.getUrl());
+        link.addProperty("thumb_media_id", message.getThumbMediaId());
+        messageJson.add("link", link);
+        break;
       case KefuMsgType.VOICE:
         JsonObject voice = new JsonObject();
         voice.addProperty("media_id", message.getMediaId());
