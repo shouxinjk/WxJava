@@ -681,4 +681,12 @@ public interface WxCpTpService {
    */
   WxCpTpOaWeDocService getWxCpTpOaWeDocService();
   void setWxCpTpOaWeDocService(WxCpTpOaWeDocService wxCpTpOaWeDocService);
+
+  /**
+   * 企业微信会话存档服务类对象
+   *
+   * @return chat data service
+   */
+  WxCpTpChatDataService getWxCpTpChatDataService();
+  void setWxCpTpChatDataService(WxCpTpChatDataService wxCpTpChatDataService);
 }

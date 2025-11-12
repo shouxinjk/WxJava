@@ -583,4 +583,11 @@ public interface WxCpService extends WxService {
    * @return
    */
   WxCpCorpGroupService getCorpGroupService();
+
+  /**
+   * 企业微信会话存档服务类对象
+   *
+   * @return
+   */
+  WxCpChatDataService getChatDataService();
 }

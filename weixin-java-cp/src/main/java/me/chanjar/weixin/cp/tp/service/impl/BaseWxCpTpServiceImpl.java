@@ -65,6 +65,7 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
   private WxCpTpKfService wxCpTpKfService = new WxCpTpKfServiceImpl(this);
   private WxCpTpOaWeDriveService oaWeDriveService = new WxCpTpOaWeDriveServiceImpl(this);
   private WxCpTpOaWeDocService oaWeDocService = new WxCpTpOaWeDocServiceImpl(this);
+  private WxCpTpChatDataService chatDataService = new WxCpTpChatDataServiceImpl(this);
 
   /**
    * 全局的是否正在刷新access token的锁.
@@ -843,5 +844,13 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
 
   @Override
   public WxCpTpOaWeDocService getWxCpTpOaWeDocService() { return oaWeDocService; }
+
+  @Override
+  public void setWxCpTpChatDataService(WxCpTpChatDataService chatDataService) {
+    this.chatDataService = chatDataService;
+  }
+
+  @Override
+  public WxCpTpChatDataService getWxCpTpChatDataService() { return chatDataService; }
 
 }

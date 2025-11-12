@@ -1615,4 +1615,41 @@ public interface WxCpApiPathConsts {
      */
     String CONVERT_TMP_EXTERNAL_USER_ID = "/cgi-bin/idconvert/convert_tmp_external_userid";
   }
+
+  /**
+   * 会话存档
+   */
+  interface ChatData {
+
+    /**
+     * 获取授权存档的成员列表
+     * https://developer.work.weixin.qq.com/document/path/99641
+     */
+    String GET_AUTH_USER_LIST = "/cgi-bin/chatdata/get_auth_user_list";
+
+    /**
+     * 设置公钥（设置公钥之后，消息才开始存档。）
+     * https://developer.work.weixin.qq.com/document/path/99587
+     */
+    String SET_PUBLIC_KEY = "/cgi-bin/chatdata/set_public_key";
+
+    /**
+     * 获取会话记录（调用该接口前必须先设置公钥）
+     * https://developer.work.weixin.qq.com/document/path/97240
+     */
+    String SYNC_MSG = "/cgi-bin/chatdata/sync_msg";
+
+    /**
+     * 获取内部群信息（内部群中至少存在一个员工在授权范围内）
+     * https://developer.work.weixin.qq.com/document/path/99495
+     */
+    String GROUP_CHAT_GET = "/cgi-bin/chatdata/groupchat/get";
+
+    /**
+     * 获取会话同意情况（传入参数的内部成员open_userid应在企业授权会话存档接口权限的员工范围中）
+     * https://developer.work.weixin.qq.com/document/path/99530
+     */
+    String GET_AGREE_STATUS = "/cgi-bin/chatdata/getagreestatus/single";
+
+  }
 }
